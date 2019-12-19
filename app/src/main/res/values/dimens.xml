@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="maxLetters">36sp</dimen>
+    <dimen name="lageLetters">30sp</dimen>
+    <dimen name="bigLetters">24sp</dimen>
+    <dimen name="normalBigLetters">18sp</dimen>
+    <dimen name="normalLetters">14sp</dimen>
+    <dimen name="normalSmallLetters">12sp</dimen>
+    <dimen name="smallLetters">10sp</dimen>
+    <dimen name="minLetters">8sp</dimen>
+    <dimen name="indent16">16dp</dimen>
+    <dimen name="indent0">0dp</dimen>
+</resources>
