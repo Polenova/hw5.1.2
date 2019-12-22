@@ -26,8 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String IMAGE_RESULT_KEY = "IMAGE_RESULT_KEY";
 
     public static Bitmap getImageFromIntent(@NonNull Intent intent) {
-        File imageFile = (File) intent.getSerializableExtra(IMAGE_RESULT_KEY);
-        return BitmapFactory.decodeFile(Objects.requireNonNull(imageFile).getAbsolutePath());
+        String imagePath = intent.getStringExtra(IMAGE_RESULT_KEY);
+        return BitmapFactory.decodeFile(Objects.requireNonNull(imagePath));
     }
 
     @Override
@@ -91,7 +91,7 @@ public class SettingsActivity extends AppCompatActivity {
                 final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), picturesName);
                 if (file.exists()) {
                     Intent resultIntent = new Intent();
-                    resultIntent.putExtra(IMAGE_RESULT_KEY, file);
+                    resultIntent.putExtra(IMAGE_RESULT_KEY, file.getAbsolutePath());
                     setResult(IMAGE_RESULT_CODE, resultIntent);
                     finish();
                 } else {
