@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -200,9 +203,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SettingsActivity.IMAGE_RESULT_CODE && data != null) {
-            Bitmap imageFromIntent = SettingsActivity.getImageFromIntent(data);
+            String imagePathFromIntent = SettingsActivity.getImagePathFromIntent(data);
+            Bitmap bitmap = BitmapFactory.decodeFile(Objects.requireNonNull(imagePathFromIntent));
             ImageView backImage = findViewById(R.id.ImageViewBack);
-            backImage.setImageBitmap(imageFromIntent);
+            backImage.setImageBitmap(bitmap);
         }
     }
 }
