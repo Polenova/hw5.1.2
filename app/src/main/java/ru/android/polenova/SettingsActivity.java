@@ -7,8 +7,6 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -25,9 +22,8 @@ public class SettingsActivity extends AppCompatActivity {
     public static final int IMAGE_RESULT_CODE = 543;
     private static final String IMAGE_RESULT_KEY = "IMAGE_RESULT_KEY";
 
-    public static Bitmap getImageFromIntent(@NonNull Intent intent) {
-        String imagePath = intent.getStringExtra(IMAGE_RESULT_KEY);
-        return BitmapFactory.decodeFile(Objects.requireNonNull(imagePath));
+    public static String getImagePathFromIntent(@NonNull Intent intent) {
+        return intent.getStringExtra(IMAGE_RESULT_KEY);
     }
 
     @Override
@@ -88,14 +84,16 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextView textViewImage = findViewById(R.id.EditTextNameImage);
                 String picturesName = textViewImage.getText().toString();
-                final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), picturesName);
+                final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                        picturesName);
                 if (file.exists()) {
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra(IMAGE_RESULT_KEY, file.getAbsolutePath());
                     setResult(IMAGE_RESULT_CODE, resultIntent);
                     finish();
                 } else {
-                    Toast.makeText(SettingsActivity.this, "Такого файла нет!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingsActivity.this, "Такого файла нет!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
